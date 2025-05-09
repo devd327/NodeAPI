@@ -34,6 +34,15 @@ app.get('/employees-count',async(req,res)=>{
     }
 });
 
+app.get('/tolreg',async(req,res)=>{
+    try{
+        const result = await pool.query('select count(region_id) from regions')
+        res.json(result.rows);
+    }catch(err){
+        res.status(500).json({Error:err.message});
+    }
+});
+
 app.get('/regions',async(req,res)=>{
     try{
         const result = await pool.query('select * from regions')
